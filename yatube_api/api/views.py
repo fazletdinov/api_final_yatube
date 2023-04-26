@@ -1,9 +1,9 @@
-# TODO:  Напишите свой вариант
 from django.shortcuts import get_object_or_404
-from posts.models import Group, Post
+
 from rest_framework import mixins, permissions, viewsets
 from rest_framework.filters import SearchFilter
 
+from posts.models import Group, Post
 from .permissions import IsOwnerOrReadOnly, ReadOnly
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
                           PostSerializer)
@@ -46,12 +46,6 @@ class FollowViewSet(mixins.ListModelMixin,
     filter_backends = (SearchFilter,)
     search_fields = ('=following__username', '=user__username')
     permission_classes = (permissions.IsAuthenticated,)
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
 
     def get_queryset(self):
         return self.request.user.followers.all()

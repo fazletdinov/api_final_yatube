@@ -3,7 +3,7 @@ from django.contrib import admin
 from posts.models import Comment, Follow, Group, Post
 
 
-class CommetnAdmin(admin.TabularInline):
+class CommentAdmin(admin.TabularInline):
     model = Comment
     fields = ('author', 'post', 'text', 'created')
     readonly_fields = ('created',)
@@ -19,7 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ('text',)
     list_filter = ('pub_date', 'group')
     list_editable = ('group',)
-    inlines = (CommetnAdmin,)
+    inlines = (CommentAdmin,)
 
 
 admin.site.register(Group)
