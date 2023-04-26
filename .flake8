@@ -1,0 +1,11 @@
+[flake8]
+
+exclude = 
+    migrations
+    venv
+    .gitignore
+    templates
+    static
+    media
+    .idea
+    tests
